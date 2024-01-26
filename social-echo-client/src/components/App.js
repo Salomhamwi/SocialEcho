@@ -1,7 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import styled from "styled-components";
-import Header from "./Header";
 import Home from "./Home";
 
 const Container = styled.div`
@@ -13,7 +12,6 @@ function App() {
   return (
     <Router>
       <Container>
-        <Header />
         <Routes>
           <Route path="/" element={<Home />} />
         </Routes>

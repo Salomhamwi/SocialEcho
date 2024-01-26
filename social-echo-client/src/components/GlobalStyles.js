@@ -11,7 +11,7 @@ const GlobalStyles = createGlobalStyle`
 
   /* Set a global font family */
   body {
-    font-family: 'Arial', sans-serif; /* Fallback font */
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; /* Alternative font */
   }
 
   /* Use a specific font for Instagram-like feel */
@@ -22,7 +22,8 @@ const GlobalStyles = createGlobalStyle`
 
   /* Apply a background color */
   body {
-    background-color: #f7f7f7;
+    background-color: #22223b;
+    color: #fff;
   }
 
   /* Define a container for the content */
@@ -46,17 +47,15 @@ const GlobalStyles = createGlobalStyle`
     margin: 10px;
     text-decoration: none;
     color: #fff;
-    background-color: #3b5998; /* Facebook blue */
+    background-color: #f4a261;
     border-radius: 5px;
     transition: background-color 0.3s ease;
 
     &:hover {
-      background-color: #4267b2; /* Facebook dark blue on hover */
+      background-color: #f2cc8f;
     }
   }
 
-  /* Additional styling specific to your social media content */
-  /* Add your own specific styles here */
 
 `;
 
