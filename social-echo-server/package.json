@@ -1,0 +1,31 @@
+{
+    "name": "server",
+    "version": "1.0.0",
+    "license": "ISC",
+    "scripts": {
+        "start": "nodemon ./server.js",
+        "build": "esbuild server.js --bundle --platform=node --target=node14 --outfile=dist/bundle.js --external:mock-aws-s3 --external:aws-sdk --external:nock"
+    },
+    "engines": {
+        "node": ">=14.20.1"
+    },
+    "dependencies": {
+        "axios": "^1.6.7",
+        "bcrypt": "^5.1.0",
+        "body-parser": "^1.20.2",
+        "cors": "^2.8.5",
+        "express": "^4.18.2",
+        "framer-motion": "^11.0.3",
+        "mongodb": "^5.6.0",
+        "mongoose": "^8.1.1",
+        "morgan": "^1.10.0",
+        "node": "^20.4.0",
+        "react-redux": "^9.1.0",
+        "redux": "^5.0.1"
+    },
+    "devDependencies": {
+        "dotenv": "^16.0.3",
+        "esbuild": "^0.18.14",
+        "nodemon": "^2.0.20"
+    }
+}
