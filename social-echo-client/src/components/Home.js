@@ -124,11 +124,12 @@ const HomeContainer = styled(motion.div)`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: clamp(10px, 5vw, 20px);
 `;
 
 const Logo = styled(motion.h2)`
   color: #fcbf49;
-  font-size: 100px;
+  font-size: clamp(50px, 5vw, 100px);
   cursor: pointer;
   &:hover {
     animation: shake 0.5s;
@@ -147,8 +148,8 @@ const Logo = styled(motion.h2)`
 
 const SmallLogoImage = styled(motion.div)`
   position: fixed;
-  width: 50px;
-  height: 65px;
+  width: clamp(41px, 5vw, 50px);
+  height: clamp(55px, 5vw, 65px);
   background: url(${logoImage}) center/contain no-repeat;
   background-size: cover;
   left: ${(props) => `${props.left}px`};
@@ -158,34 +159,35 @@ const SmallLogoImage = styled(motion.div)`
 `;
 
 const Tagline = styled(motion.p)`
-  font-size: 30px;
+  font-size: clamp(12px, 2vw, 30px);
 `;
 
 const LoginForm = styled(motion.form)`
-  background-color: rgba(61, 64, 91, 0.7); 
-  margin: 0 auto;
-  padding: 80px;
+  background-color: rgba(61, 64, 91, 0.7);
+  padding: 10px;
+  padding-top: 30px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  margin-top: 50px;
-  width: 300px;
+  margin-top: clamp(25px, 5vh, 55px);
+  width: clamp(270px, 40vw, 450px);
 `;
 
 
 const Label = styled(motion.label)`
   display: block;
-  margin-bottom: 5px;
+  margin-bottom: clamp(5px, 1vw, 15px);
   color: #fff;
+  font-size: clamp(12px, 2vw, 20px);
 `;
 
 const Input = styled(motion.input)`
-  width: 100%;
-  padding: 8px;
-  margin-bottom: 20px;
+  width: 60%;
+  padding: clamp(7px, 1vw, 8px);
+  margin-bottom: clamp(16px, 2vw, 20px);
   background-color: rgba(255, 255, 255);
   color: white;
   border: none;
-  border-radius: 10px;
+  border-radius: clamp(7px, 1vw, 10px);
   &::placeholder {
     color: #3d405b;
   }
@@ -194,20 +196,21 @@ const Input = styled(motion.input)`
 
 const ForgotPasswordLink = styled(motion.a)`
   display: block;
-  text-align: right;
-  margin-bottom: 10px;
+  text-align: center;
+  margin-bottom: clamp(15px, 2vw, 20px);
   color: #fff;
+  font-size: clamp(12px, 2vw, 20px);
 `;
 
 const SharedButtonStyles = `
   background-color: #fcbf49;
   color: #3d405b;
-  padding: 10px;
+  padding: clamp(7px, 2vw, 10px);
   border: none;
-  border-radius: 5px;
+  border-radius: clamp(7px, 2vw, 10px);
   cursor: pointer;
-  width: 100%;
-  margin-bottom: 10px;
+  width: 45%;
+  margin-bottom: clamp(15px, 2vw, 20px);
 `;
 
 const LoginButton = styled(motion.button)`

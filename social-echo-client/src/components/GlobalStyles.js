@@ -11,7 +11,8 @@ const GlobalStyles = createGlobalStyle`
 
   /* Set a global font family */
   body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; /* Alternative font */
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; 
+    font-size: clamp(16px, 2vw, 24px); 
   }
 
   /* Use a specific font for Instagram-like feel */
@@ -31,7 +32,7 @@ const GlobalStyles = createGlobalStyle`
   #root {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 20px;
+    padding: clamp(10px, 5vw, 20px);
   }
 
   /* Add a box shadow for a card-like effect */
@@ -39,22 +40,7 @@ const GlobalStyles = createGlobalStyle`
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     overflow: hidden;
-  }
-
-  /* Style links to resemble social media buttons */
-  .social-link {
-    display: inline-block;
-    padding: 10px 20px;
-    margin: 10px;
-    text-decoration: none;
-    color: #fff;
-    background-color: #f4a261;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-
-    &:hover {
-      background-color: #f2cc8f;
-    }
+    padding: clamp(10px, 2vw, 20px);
   }
 
 
