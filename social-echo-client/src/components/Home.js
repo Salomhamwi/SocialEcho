@@ -185,7 +185,6 @@ const Input = styled(motion.input)`
   padding: clamp(7px, 1vw, 8px);
   margin-bottom: clamp(16px, 2vw, 20px);
   background-color: rgba(255, 255, 255);
-  color: white;
   border: none;
   border-radius: clamp(7px, 1vw, 10px);
   &::placeholder {
