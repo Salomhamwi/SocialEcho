@@ -1,62 +1,116 @@
-import React, { useState} from "react";
+import React, { useState, useEffect} from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
-import {logoImage} from "../images/logo.png"
+import logoImage from "../images/logo.png"
+import { AnimatePresence } from "framer-motion";
 
 
 const Home = () => {
-  // const [logoVisible, setLogoVisible] = useState(false);
-  // const controls = useAnimation();
-  // const handleLogoClick = () => {
-  //   setLogoVisible(true);
+  
+  const [smallLogoImages, setSmallLogoImages] = useState([]);
 
-  //   controls.start({
-  //     opacity: 1,
-  //     x: 0,
-  //     transition: {duration: 0.5},
-  //   });
+  const showSmallLogoImages = () => {
+    const logos = Array.from({ length: 30 }, (_, index) => ({
+      id: index,
+      left: Math.random() * window.innerWidth, 
+      top: Math.random() * window.innerHeight,
+    }));
 
-  //   setTimeout(() => {
-  //     controls.start({
-  //       x: [-20, 20 , -20, 20, 0],
-  //       transition: {duration: 0.2, times: [0, 0.25, 0.5, 0.75, 1]}
-  //     });
-
-  //   }, 500);
-    
-
-  //   setTimeout(() => {
-  //     controls.start({ opacity: 0, transition: { duration: 1 } });
-  //   }, 2000);
-
-  //   setTimeout(() => {
-  //     setLogoVisible(false);
-  //   }, 3000);
-  // };
-
-
-  const containerVariants = {
-    hidden: { opacity: 0, x: "-100%" },
-    visible: { opacity: 1, x: 0, transition: { duration: 1 } },
+    logos.forEach((logo, index) => {
+      setTimeout(() => {
+        setSmallLogoImages((prevLogos) => [...prevLogos, logo]);
+      }, index * 100); 
+    });
   };
+  
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      showSmallLogoImages();
+    }, 1000);
+
+
+    return () => {
+      setSmallLogoImages([]);
+      clearTimeout(timeout);
+    };
+  }, []);
+
 
   return (
-    <HomeContainer
-      variants={containerVariants}
-      initial="hidden"
-      animate="visible"
-    >
-      <Logo>SocialEcho</Logo>
-      <Tagline>Make Friends, make your posts Echoooo.</Tagline>
-      <Tagline>Let your friends listen around the world from SocialEcho.</Tagline>
-      <LoginForm>
-        <Input type="email" placeholder="Email" />
-        <Input type="password" placeholder="Password" />
-        <ForgotPasswordLink>Forgot password?</ForgotPasswordLink>
-        <LoginButton>Login</LoginButton>
-        <Label>Don't have an account?</Label>
-        <CreateAccountLink>Create New Account</CreateAccountLink>
-      </LoginForm>
+    <HomeContainer>
+      <Logo
+        initial={{ opacity: 0, x: -100 }}
+        animate={{ opacity: 1, x: 0, transition: { duration: 0.5, delay: 0.2 } }}
+      >
+        SocialEcho
+      </Logo>
+      <Tagline
+        initial={{ opacity: 0, x: -100 }}
+        animate={{ opacity: 1, x: 0, transition: { duration: 0.5, delay: 0.4 } }}
+      >
+        Make Friends, make your posts Echoooo.
+      </Tagline>
+      <Tagline
+        initial={{ opacity: 0, x: -100 }}
+        animate={{ opacity: 1, x: 0, transition: { duration: 0.5, delay: 0.4 } }}
+      >
+        Let your friends listen around the world from SocialEcho.
+      </Tagline>
+      <AnimatePresence>
+        {smallLogoImages.map((logo) => (
+          <SmallLogoImage
+            key={logo.id}
+            left={logo.left}
+            top={logo.top}
+            initial={{ opacity: 0.1, top: `calc(${logo.top}px + 100vh)` }}
+            animate={{ opacity: [0.1, 0.15, 0.20, 0.35, 0.5], top: logo.top }}
+            exit={{ opacity: [0.5, 0.35, 0.20, 0.15, 0.1], top: `calc(${logo.top}px - 100vh)` }}
+            transition={{ duration: 1, delay: 1.3 }}
+          />
+        ))}
+      </AnimatePresence>
+      <LoginForm
+  initial={{ opacity: 0, x: -100 }}
+  animate={{ opacity: 1, x: 0, transition: { duration: 0.5, delay: 0.6 } }}
+>
+  <Input
+    type="email"
+    placeholder="Email"
+    initial={{ opacity: 0, y: -20 }}
+    animate={{ opacity: 1, y: 0, transition: { duration: 0.5, delay: 0.7 } }}
+  />
+  <Input
+    type="password"
+    placeholder="Password"
+    initial={{ opacity: 0, y: -20 }}
+    animate={{ opacity: 1, y: 0, transition: { duration: 0.5, delay: 0.8 } }}
+  />
+  <ForgotPasswordLink
+    initial={{ opacity: 0, y: -20 }}
+    animate={{ opacity: 1, y: 0, transition: { duration: 0.5, delay: 0.9 } }}
+  >
+    Forgot password?
+  </ForgotPasswordLink>
+  <LoginButton
+    initial={{ opacity: 0, y: -20 }}
+    animate={{ opacity: 1, y: 0, transition: { duration: 0.5, delay: 1 } }}
+  >
+    Login
+  </LoginButton>
+  <Label
+    initial={{ opacity: 0, y: -20 }}
+    animate={{ opacity: 1, y: 0, transition: { duration: 0.5, delay: 1.1 } }}
+  >
+    Don't have an account?
+  </Label>
+  <CreateAccountLink
+    initial={{ opacity: 0, y: -20 }}
+    animate={{ opacity: 1, y: 0, transition: { duration: 0.5, delay: 1.2 } }}
+  >
+    Create New Account
+  </CreateAccountLink>
+</LoginForm>
     </HomeContainer>
   );
 };
@@ -72,16 +126,42 @@ const HomeContainer = styled(motion.div)`
   align-items: center;
 `;
 
-const Logo = styled.h2`
+const Logo = styled(motion.h2)`
   color: #fcbf49;
   font-size: 100px;
+  cursor: pointer;
+  &:hover {
+    animation: shake 0.5s;
+    animation-iteration-count: 1;
+  }
+
+  @keyframes shake {
+    0% { transform: translateX(0); }
+    20% { transform: translateX(-10px); }
+    40% { transform: translateX(10px); }
+    60% { transform: translateX(-10px); }
+    80% { transform: translateX(10px); }
+    100% { transform: translateX(0); }
+  }
 `;
 
-const Tagline = styled.p`
+const SmallLogoImage = styled(motion.div)`
+  position: fixed;
+  width: 50px;
+  height: 65px;
+  background: url(${logoImage}) center/contain no-repeat;
+  background-size: cover;
+  left: ${(props) => `${props.left}px`};
+  top: ${(props) => `calc(${props.top}px + 100vh)`}; 
+  opacity: 0.1; 
+  z-index: 0;
+`;
+
+const Tagline = styled(motion.p)`
   font-size: 30px;
 `;
 
-const LoginForm = styled.form`
+const LoginForm = styled(motion.form)`
   background-color: rgba(61, 64, 91, 0.7); 
   margin: 0 auto;
   padding: 80px;
@@ -92,17 +172,17 @@ const LoginForm = styled.form`
 `;
 
 
-const Label = styled.label`
+const Label = styled(motion.label)`
   display: block;
   margin-bottom: 5px;
   color: #fff;
 `;
 
-const Input = styled.input`
+const Input = styled(motion.input)`
   width: 100%;
   padding: 8px;
   margin-bottom: 20px;
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255);
   color: white;
   border: none;
   border-radius: 10px;
@@ -112,7 +192,7 @@ const Input = styled.input`
 `;
 
 
-const ForgotPasswordLink = styled.a`
+const ForgotPasswordLink = styled(motion.a)`
   display: block;
   text-align: right;
   margin-bottom: 10px;
@@ -130,11 +210,11 @@ const SharedButtonStyles = `
   margin-bottom: 10px;
 `;
 
-const LoginButton = styled.button`
+const LoginButton = styled(motion.button)`
   ${SharedButtonStyles}
 `;
 
-const CreateAccountLink = styled.button`
+const CreateAccountLink = styled(motion.button)`
   ${SharedButtonStyles}
 `;
 
