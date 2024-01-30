@@ -12,16 +12,6 @@ const CreateAccount = () => {
     nickname: "",
   });
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Add your account creation logic here
-    console.log("Account Created:", formData);
-  };
 
   const [smallLogoImages, setSmallLogoImages] = useState([]);
 
@@ -37,6 +27,34 @@ const CreateAccount = () => {
         setSmallLogoImages((prevLogos) => [...prevLogos, logo]);
       }, index * 100); 
     });
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    
+    try {
+      const response = await fetch("/api/createAccount", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        console.log("Account created successfully");
+      } else {
+        console.error("Failed to create account");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
   
 
@@ -180,7 +198,7 @@ const InputLabel = styled(motion.label)`
 `;
 
 const Input = styled(motion.input)`
-  width: 100%;
+  width: 90%;
   padding: clamp(7px, 1vw, 8px);
   margin-bottom: clamp(16px, 2vw, 20px);
   background-color: rgba(255, 255, 255);

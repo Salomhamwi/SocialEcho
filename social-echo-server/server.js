@@ -4,8 +4,7 @@ const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
 
-//const { signupHandler } = require('./handlers/signupHandler');
-//example of require
+const {createAccountHandler} = require('./handlers/createAccountHandler');
 
 const PORT = 4000;
 
@@ -30,7 +29,7 @@ express()
 .use(express.urlencoded({ extended: false }))
 .use("/", express.static(__dirname + "/"))
 //endpoints examples:
-// .post("/signup", signupHandler)
+.post("/createAccount", createAccountHandler)
 // .post("/login", loginHandler)
 // .patch("/profile/:userId", profileUpdateHandler)
 // .post('/createteam', createTeamHandler)
