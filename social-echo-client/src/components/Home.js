@@ -3,10 +3,12 @@ import styled from "styled-components";
 import { motion } from "framer-motion";
 import logoImage from "../images/logo.png"
 import { AnimatePresence } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 
 const Home = () => {
-  
+
+  const navigate = useNavigate();
   const [smallLogoImages, setSmallLogoImages] = useState([]);
 
   const showSmallLogoImages = () => {
@@ -29,13 +31,15 @@ const Home = () => {
       showSmallLogoImages();
     }, 1000);
 
-
     return () => {
       setSmallLogoImages([]);
       clearTimeout(timeout);
     };
   }, []);
 
+  const handleCreateAccountClick = () => {
+    navigate("/createaccount");
+  };
 
   return (
     <HomeContainer>
@@ -104,12 +108,13 @@ const Home = () => {
   >
     Don't have an account?
   </Label>
-  <CreateAccountLink
+  <CreateAccountButton
+    onClick={handleCreateAccountClick} 
     initial={{ opacity: 0, y: -20 }}
     animate={{ opacity: 1, y: 0, transition: { duration: 0.5, delay: 1.2 } }}
   >
     Create New Account
-  </CreateAccountLink>
+  </CreateAccountButton>
 </LoginForm>
     </HomeContainer>
   );
@@ -216,7 +221,7 @@ const LoginButton = styled(motion.button)`
   ${SharedButtonStyles}
 `;
 
-const CreateAccountLink = styled(motion.button)`
+const CreateAccountButton = styled(motion.button)`
   ${SharedButtonStyles}
 `;
 
