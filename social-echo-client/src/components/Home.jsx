@@ -187,7 +187,8 @@ const SmallLogoImage = styled(motion.div)`
   left: ${(props) => `${props.left}px`};
   top: ${(props) => `calc(${props.top}px + 100vh)`};
   opacity: 0.1;
-  z-index: 0; //to solve
+  z-index: 0; 
+  pointer-events: none; 
 `;
 
 const Tagline = styled(motion.p)`

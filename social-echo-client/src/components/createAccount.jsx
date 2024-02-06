@@ -215,6 +215,7 @@ const SmallLogoImage = styled(motion.div)`
   top: ${(props) => `calc(${props.top}px + 100vh)`}; 
   opacity: 0.1; 
   z-index: 0;
+  pointer-events: none; 
 `;
 
 export default CreateAccount;
