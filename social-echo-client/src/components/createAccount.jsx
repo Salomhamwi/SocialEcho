@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
 import logoImage from '../images/logo.png';
+import useShowSmallLogoImages from './Functions/useShowSmallLogoImages';
 
 function CreateAccount() {
   const [formData, setFormData] = useState({
@@ -12,21 +13,7 @@ function CreateAccount() {
     nickname: '',
   });
 
-  const [smallLogoImages, setSmallLogoImages] = useState([]);
-
-  const showSmallLogoImages = () => {
-    const logos = Array.from({ length: 30 }, (_, index) => ({
-      id: index,
-      left: Math.random() * window.innerWidth,
-      top: Math.random() * window.innerHeight,
-    }));
-
-    logos.forEach((logo, index) => {
-      setTimeout(() => {
-        setSmallLogoImages((prevLogos) => [...prevLogos, logo]);
-      }, index * 100);
-    });
-  };
+  const smallLogoImages = useShowSmallLogoImages();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -54,17 +41,6 @@ function CreateAccount() {
       console.error('Error:', error);
     }
   };
-
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      showSmallLogoImages();
-    }, 1000);
-
-    return () => {
-      setSmallLogoImages([]);
-      clearTimeout(timeout);
-    };
-  }, []);
 
   return (
     <CreateAccountContainer>

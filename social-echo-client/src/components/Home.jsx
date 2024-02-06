@@ -1,37 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import logoImage from '../images/logo.png';
+import useShowSmallLogoImages from './Functions/useShowSmallLogoImages';
 
 function Home() {
   const navigate = useNavigate();
-  const [smallLogoImages, setSmallLogoImages] = useState([]);
-
-  const showSmallLogoImages = () => {
-    const logos = Array.from({ length: 30 }, (_, index) => ({
-      id: index,
-      left: Math.random() * window.innerWidth,
-      top: Math.random() * window.innerHeight,
-    }));
-
-    logos.forEach((logo, index) => {
-      setTimeout(() => {
-        setSmallLogoImages((prevLogos) => [...prevLogos, logo]);
-      }, index * 100);
-    });
-  };
-
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      showSmallLogoImages();
-    }, 1000);
-
-    return () => {
-      setSmallLogoImages([]);
-      clearTimeout(timeout);
-    };
-  }, []);
+  const smallLogoImages = useShowSmallLogoImages();
 
   const handleCreateAccountClick = () => {
     navigate('/createaccount');
@@ -211,7 +187,7 @@ const SmallLogoImage = styled(motion.div)`
   left: ${(props) => `${props.left}px`};
   top: ${(props) => `calc(${props.top}px + 100vh)`};
   opacity: 0.1;
-  z-index: -1; //to solve
+  z-index: 0; //to solve
 `;
 
 const Tagline = styled(motion.p)`
